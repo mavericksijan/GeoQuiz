@@ -49,9 +49,17 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
 
         }
+
+        binding.previousButton.setOnClickListener {
+            quizViewModel.moveToPrevious()
+            updateQuestion()
+            quizViewModel.isCheater = false
+        }
+
         binding.nextButton.setOnClickListener {
             quizViewModel.moveToNext()
             updateQuestion()
+            quizViewModel.isCheater = false
         }
 
         binding.cheatButton.setOnClickListener {
