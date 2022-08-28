@@ -1,3 +1,10 @@
+/**
+ * Author: Sijan Shrestha
+ * Prepared for University of the Sunshine Coast
+ * CRN: 1148556
+ * Mobile App Project, 2022
+ */
+
 package com.example.geoquiz
 
 import android.app.Activity
@@ -18,7 +25,7 @@ private const val TAG ="MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-
+    //initializing ActivityMainBinding
     private lateinit var binding: ActivityMainBinding
     private val quizViewModel: QuizViewModel by viewModels()
 
@@ -67,9 +74,12 @@ class MainActivity : AppCompatActivity() {
         val questionTextResId = quizViewModel.currentQuestionText
         binding.questionTextView.setText(questionTextResId)
     }
+
+    //Adding check answer
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
-        
+
+        //changing toast message based on value of userAnswer
         val messageResId = when {
             userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast

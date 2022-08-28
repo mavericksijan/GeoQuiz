@@ -1,3 +1,10 @@
+/**
+ * Author: Sijan Shrestha
+ * Prepared for University of the Sunshine Coast
+ * CRN: 1148556
+ * Mobile App Project, 2022
+ */
+
 package com.example.geoquiz
 
 import android.app.Activity
@@ -32,11 +39,13 @@ class CheatActivity : AppCompatActivity() {
 
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
 
+        //Enabling cheating
         binding.showAnswerButton.setOnClickListener {
             val answerText = when {
                 answerIsTrue -> R.string.true_button
                 else -> R.string.false_button
             }
+            //showing answer when pressed the button
             binding.answerTextView.setText(answerText)
             setAnswerShownResult(true)
             val messageResId = R.string.judgement_toast
@@ -53,7 +62,7 @@ class CheatActivity : AppCompatActivity() {
         }
     }
 
-
+//setting a result when user presses show answer button
     private fun setAnswerShownResult(isAnswerShown: Boolean) {
         val data = Intent().apply {
             putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown)
@@ -61,6 +70,7 @@ class CheatActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK, data)
     }
 
+    //create intent for cheatActivity. Companion object to access functions without having an instance of a class
     companion object {
         fun newIntent(packageContext: Context, answerIsTrue: Boolean): Intent {
             return Intent(packageContext, CheatActivity::class.java).apply {

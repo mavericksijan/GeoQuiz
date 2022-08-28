@@ -1,12 +1,23 @@
+/**
+ * Author: Sijan Shrestha
+ * Prepared for University of the Sunshine Coast
+ * CRN: 1148556
+ * Mobile App Project, 2022
+ */
+
 package com.example.geoquiz
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
+
+//vreating a viewmodel class
 private const val TAG = "QuizViewModel"
 const val IS_CHEATER_KEY = "IS_CHEATER_KEY"
 class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
+
+    //adding strings of questions
     private val questionBank = listOf(
         Question(R.string.question_australia, true),
         Question(R.string.question_oceans, true),
