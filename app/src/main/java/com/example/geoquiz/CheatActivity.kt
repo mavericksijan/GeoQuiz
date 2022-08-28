@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.geoquiz.databinding.ActivityCheatBinding
 
@@ -38,11 +39,20 @@ class CheatActivity : AppCompatActivity() {
             }
             binding.answerTextView.setText(answerText)
             setAnswerShownResult(true)
+            val messageResId = R.string.judgement_toast
+            Toast.makeText(
+                this,
+                messageResId,
+                Toast.LENGTH_SHORT
+            ).show()
         }
-        binding.hideAnswerButton.setOnClickListener {
+        binding.backButton.setOnClickListener {
+            val intent = MainActivity.newIntent(this@CheatActivity)
             MainLauncher.launch(intent)
+
         }
     }
+
 
     private fun setAnswerShownResult(isAnswerShown: Boolean) {
         val data = Intent().apply {

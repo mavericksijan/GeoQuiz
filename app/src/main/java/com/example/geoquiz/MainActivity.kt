@@ -1,6 +1,7 @@
 package com.example.geoquiz
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,16 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private val cheatLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        //Handle the result
-        if (result.resultCode == Activity.RESULT_OK){
-            quizViewModel.isCheater = result.data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false)?: false
-        }
-    }
-
-
-
-
+    ) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +45,11 @@ class MainActivity : AppCompatActivity() {
         binding.previousButton.setOnClickListener {
             quizViewModel.moveToPrevious()
             updateQuestion()
-            quizViewModel.isCheater = false
         }
 
         binding.nextButton.setOnClickListener {
             quizViewModel.moveToNext()
             updateQuestion()
-            quizViewModel.isCheater = false
         }
 
         binding.cheatButton.setOnClickListener {
@@ -81,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         
         val messageResId = when {
-            quizViewModel.isCheater -> R.string.judgement_toast
             userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
@@ -90,5 +79,12 @@ class MainActivity : AppCompatActivity() {
             messageResId, 
             Toast.LENGTH_SHORT
         ).show()
+    }
+    companion object {
+        fun newIntent(packageContext: Context): Intent {
+            return Intent(packageContext, MainActivity::class.java).apply {
+            }
+        }
+
     }
 }
